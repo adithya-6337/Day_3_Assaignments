@@ -8,8 +8,9 @@ public class EmployeeWage {
     static final int IS_FULL_TIME = 2;
     static final int WORKING_DAYS_PER_MONTH = 20;
     static final int WORKING_HOUR_PER_MONTH = 100;
-    public static void main(String[] args) {
-        System.out.println("Welcome to Employee Wage Computation");
+    public String firstName, lastName;
+
+    public void calTotalEmpWage() {
         int dayCount = 1;
         int workingHours = 0;
         int totalWage = 0;
@@ -25,7 +26,7 @@ public class EmployeeWage {
                 case IS_PART_TIME:
                     empWage = WAGE_PER_HOUR * PART_TIME_HOUR;
                     workingHours += PART_TIME_HOUR;
-                    System.out.println("Employee PART TIME");
+                    System.out.println("Employee rPART TIME");
                     break;
                 default:
                     System.out.println("Employee Absent");
@@ -37,4 +38,21 @@ public class EmployeeWage {
         System.out.println("Working Hours = " + workingHours);
         System.out.println("Total Wage = " + totalWage);
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }
+
