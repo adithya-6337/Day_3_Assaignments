@@ -1,58 +1,46 @@
 package com.bridgelabz;
 
 public class EmployeeWage {
-    static final int WAGE_PER_HOUR = 20;
-    static final int FULL_DAY_HOUR = 8;
-    static final int PART_TIME_HOUR = 4;
-    static final int IS_PART_TIME = 1;
-    static final int IS_FULL_TIME = 2;
-    static final int WORKING_DAYS_PER_MONTH = 20;
-    static final int WORKING_HOUR_PER_MONTH = 100;
-    public String firstName, lastName;
+    final static int NOT_WORKING = 0;
+    final static int FULL_TIME = 1;
+    final static int PART_TIME = 2;
+    public String company;
+    public int empRatePerHr;
+    public int numOfWorkingDays;
+    public int maxWorkingHrs;
 
-    public void calTotalEmpWage() {
-        int dayCount = 1;
-        int workingHours = 0;
-        int totalWage = 0;
-        while (dayCount <= WORKING_DAYS_PER_MONTH && workingHours <= WORKING_HOUR_PER_MONTH) {
-            int empPresent = (int) Math.floor(Math.random() * 10) % 3;
-            int empWage = 0;
-            switch (empPresent) {
-                case IS_FULL_TIME:
-                    empWage = WAGE_PER_HOUR * FULL_DAY_HOUR;
-                    workingHours += FULL_DAY_HOUR;
-                    System.out.println("Employee FULL TIME");
+    public EmployeeWage(String company, int empRatePerHr, int numOfWorkingDays, int maxWorkingHrs) {
+        this.company = company;
+        this.empRatePerHr = empRatePerHr;
+        this.numOfWorkingDays = numOfWorkingDays;
+        this.maxWorkingHrs = maxWorkingHrs;
+    }
+    public void calEmpWagePerMonth() {
+        int empHrs = 0;
+        int totalEmpWage = 0;
+        int empWage = 0;
+        int totalEmpHrs = 0;
+        int totalWorkingDays = 0;
+
+        while (totalEmpHrs <= maxWorkingHrs && totalWorkingDays <= numOfWorkingDays) {
+            totalWorkingDays++;
+            int empCheck = (int) Math.floor(Math.random() * 10) % 3;
+
+            switch (empCheck) {
+                case FULL_TIME:
+                    empHrs = 8;
                     break;
-                case IS_PART_TIME:
-                    empWage = WAGE_PER_HOUR * PART_TIME_HOUR;
-                    workingHours += PART_TIME_HOUR;
-                    System.out.println("Employee rPART TIME");
+
+                case PART_TIME:
+                    empHrs = 4;
                     break;
+
                 default:
-                    System.out.println("Employee Absent");
+                    empHrs = 0;
             }
-            totalWage += empWage;
-            System.out.println("Employee Daily Wage Day #" + dayCount + "=> " + empWage);
-            dayCount++;
+            totalEmpHrs += empHrs;
         }
-        System.out.println("Working Hours = " + workingHours);
-        System.out.println("Total Wage = " + totalWage);
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+        totalEmpWage = totalEmpHrs * empRatePerHr;
+        System.out.println("Company: " + company + " Total Employee Wage: " + totalEmpWage);
     }
 }
-
